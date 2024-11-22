@@ -1,59 +1,42 @@
 package mycalci;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Calci {
+class Calci {
+    public static void main(String[] args) throws FileNotFoundException {
+        // Load file
+        File file = new File("D:\\file.txt");
+        Scanner scanner = new Scanner(file);
 
-    public static void main(String[] args) {
-        // Create a scanner object for user input
-        Scanner scanner = new Scanner(System.in);
+        // Read numbers and operation from file
+        int num1 = scanner.nextInt();
+        int num2 = scanner.nextInt();
+        char operation = scanner.next().charAt(0);
+        scanner.close();
 
-        // Display the menu
-        System.out.println("Simple Calculator");
-        System.out.println("Select an operation:");
-        System.out.println("1. Add");
-        System.out.println("2. Subtract");
-        System.out.println("3. Multiply");
-        System.out.println("4. Divide");
-
-        // Get the user's choice
-        int choice = scanner.nextInt();
-
-        // Get the two numbers from the user
-        System.out.print("Enter the first number: ");
-        double num1 = scanner.nextDouble();
-        System.out.print("Enter the second number: ");
-        double num2 = scanner.nextDouble();
-
-        // Perform the calculation based on the user's choice
-        double result = 0;
-        switch (choice) {
-            case 1:
-                result = num1 + num2;
-                System.out.println("Result: " + result);
+        // Perform operation using switch
+        switch (operation) {
+            case '+':
+                System.out.println("Sum is: " + (num1 + num2));
                 break;
-            case 2:
-                result = num1 - num2;
-                System.out.println("Result: " + result);
+            case '-':
+                System.out.println("Difference is: " + (num1 - num2));
                 break;
-            case 3:
-                result = num1 * num2;
-                System.out.println("Result: " + result);
+            case '*':
+                System.out.println("Product is: " + (num1 * num2));
                 break;
-            case 4:
+            case '/':
                 if (num2 != 0) {
-                    result = num1 / num2;
-                    System.out.println("Result: " + result);
+                    System.out.println("Quotient is: " + (num1 / num2));
                 } else {
                     System.out.println("Error: Division by zero is not allowed.");
                 }
                 break;
             default:
-                System.out.println("Invalid choice.");
-                break;
+                System.out.println("Invalid operation.");
+                break; // Optional, but recommended to maintain consistency
         }
-
-        // Close the scanner
-        scanner.close();
     }
 }
